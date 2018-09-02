@@ -1,4 +1,7 @@
+
 <!doctype html>
+{% load static %}
+
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -7,10 +10,35 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/my_style.css' %}" >
 
     <title> {% block title %} Hello, world! {% endblock %}</title>
   </head>
   <body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'home' %}">To-Do List</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'about' %}">About</a>
+          </li>
+
+
+        </ul>
+      </div>
+        <form class="form-inline my-2 my-lg-0" method="POST">
+          {% csrf_token %}
+          <input class="form-control mr-sm-2" type="search" placeholder="To-do Item" aria-label="Search" name="item">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Add to List</button>
+        </form>
+    </nav>
+
+
     <br/>
     <div class="container">
 

@@ -1,5 +1,45 @@
 {% extends 'base.html' %}
 
+{% block title %} Todo List App | About {% endblock %}
+
 {% block content %}
-<h1>Hello World</h1>
+
+{% if messages %}
+
+    {% for message in messages %}
+        <div class="alert alert-warning alert-dismissable" role="alert">
+            <button class = "close" data-dismiss="alert">
+                <small><sup>x</sup></small>
+            </button>
+            {{ message }}
+        </div>
+
+    {% endfor %}
+
+{% endif %}
+
+    {% if all_items %}
+
+    <table class="table table-bordered">
+        {% for things in all_items %}
+            {% if things.completed %}
+                <tr class="table-secondary">
+                    <td class="striker">{{ things.item }} </td>
+                    <td><center>{{ things.completed }}</center></td>
+                    <td><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>{{ things.item }} </td>
+                    <td><center>{{ things.completed }}</center></td>
+                    <td><center><a href="{% url 'delete' things.id %}">Delete</a></center></td>
+                </tr>
+            {% endif %}
+
+        {% endfor %}
+
+    </table>
+
+    {% endif %}
+
 {% endblock %}
